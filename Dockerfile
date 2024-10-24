@@ -4,19 +4,20 @@ FROM openjdk:21-jdk-slim
 # Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copiar el archivo pom.xml y el directorio de Maven
+# Copiar el archivo pom.xml y el directorio de código fuente
 COPY pom.xml ./
+COPY src ./src
 COPY mvnw ./
 COPY .mvn ./.mvn
 
 # Descargar dependencias (Maven)
-RUN ./mvnw dependency:go-offline -B
-
-# Copiar el código fuente
-COPY src ./src
+RUN chmod +x mvnw && ./mvnw dependency:go-offline -B
 
 # Compilar la aplicación
 RUN ./mvnw package -DskipTests
+
+# Verificar si el JAR se generó
+RUN ls -l target
 
 # Copiar el archivo JAR generado al contenedor
 COPY target/numeric-converter-0.0.1-SNAPSHOT.jar app.jar
