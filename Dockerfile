@@ -4,12 +4,16 @@ FROM openjdk:21-jdk-slim
 # Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copiar el archivo pom.xml y el directorio de código fuente
-COPY pom.xml .
-COPY src ./src
+# Copiar el archivo pom.xml y el directorio de Maven
+COPY pom.xml ./
+COPY mvnw ./
+COPY .mvn ./.mvn
 
 # Descargar dependencias (Maven)
 RUN ./mvnw dependency:go-offline -B
+
+# Copiar el código fuente
+COPY src ./src
 
 # Compilar la aplicación
 RUN ./mvnw package -DskipTests
