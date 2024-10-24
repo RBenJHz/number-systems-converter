@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es-co">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Sistemas Numéricos</title>  <!-- Título que aparece en la pestaña del navegador -->
+    <link rel="stylesheet" href="styles.css"> <!-- Enlace al archivo de estilos CSS -->
+</head>
+
+<body>
+<div class="container"> <!-- Contenedor principal para el contenido -->
+    <h1>Conversor de Sistemas Numéricos</h1> <!-- Título principal -->
+    <h2>Binario, Octal, Decimal, Hexadecimal</h2> <!-- Subtítulo de los sistemas numéricos disponibles -->
+
+    <div class="input-group"> <!-- Grupo de entrada para el valor a convertir -->
+        <label for="number">Valor a convertir</label> <!-- Etiqueta para el campo de entrada -->
+        <input type="text" id="number" placeholder="Ingrese un número"> <!-- Campo de texto para ingresar el número -->
+    </div>
+
+    <div class="input-group"> <!-- Grupo de entrada para el sistema numérico de entrada -->
+        <label for="sourceSystem">Sistema numérico de entrada</label> <!-- Etiqueta para el selector -->
+        <select id="sourceSystem"> <!-- Selector para el sistema numérico de origen -->
+            <option value="" disabled selected>Seleccione</option> <!-- Opción por defecto deshabilitada -->
+            <option value="binary">Binario</option> <!-- Opción para binario -->
+            <option value="octal">Octal</option> <!-- Opción para octal -->
+            <option value="decimal">Decimal</option> <!-- Opción para decimal -->
+            <option value="hexadecimal">Hexadecimal</option> <!-- Opción para hexadecimal -->
+        </select>
+    </div>
+
+    <div class="input-group"> <!-- Grupo de entrada para el sistema numérico de salida -->
+        <label for="targetSystem">Sistema numérico de salida</label> <!-- Etiqueta para el selector -->
+        <select id="targetSystem"> <!-- Selector para el sistema numérico de destino -->
+            <option value="" disabled selected>Seleccione</option> <!-- Opción por defecto deshabilitada -->
+            <option value="binary">Binario</option> <!-- Opción para binario -->
+            <option value="octal">Octal</option> <!-- Opción para octal -->
+            <option value="decimal">Decimal</option> <!-- Opción para decimal -->
+            <option value="hexadecimal">Hexadecimal</option> <!-- Opción para hexadecimal -->
+        </select>
+    </div>
+
+    <button id="convertButton">Convertir</button> <!-- Botón para iniciar la conversión -->
+
+    <div id="resultContainer" class="result-container" style="display: none;"> <!-- Contenedor para mostrar resultados -->
+        <p id="result" style="word-wrap: break-word; overflow-wrap: break-word;"></p> <!-- Elemento para mostrar el resultado de la conversión -->
+        <button id="copyButton" style="display: none;">Copiar</button> <!-- Botón para copiar el resultado -->
+        <button id="clearButton" style="display: none;">Limpiar</button> <!-- Botón para limpiar el formulario -->
+    </div>
+
+    <button id="infoButton">¿Qué es la conversión de sistemas numéricos?</button> <!-- Botón para mostrar información sobre la conversión -->
+    <div id="infoModal" class="modal" style="display:none;"> <!-- Modal para mostrar información sobre la conversión -->
+        <div class="modal-content"> <!-- Contenido del modal -->
+            <span class="close">&times;</span> <!-- Botón para cerrar el modal -->
+            <h3>¿Qué es la conversión de sistemas numéricos?</h3> <!-- Título de la sección de información -->
+            <p>
+                La conversión de sistemas numéricos implica transformar un número de un sistema a otro, como de decimal a binario, o de hexadecimal a octal. Esta práctica es crucial en diversas aplicaciones, incluyendo programación, electrónica e informática.
+            </p>
+            <h3>1. Sistema Binario</h3>
+            <p>
+                El sistema binario es un sistema de base 2 que utiliza únicamente los dígitos 0 y 1. Cada posición en un número binario representa una potencia de 2. Por ejemplo, el número binario <code>101</code> se descompone como (1 * 2^2 + 0 * 2^1 + 1 * 2^0 = 4 + 0 + 1 = 5) en decimal. La principal ventaja del sistema binario es su simplicidad al representar los estados de los circuitos electrónicos, donde 1 puede indicar "encendido" y 0 "apagado". Sin embargo, su desventaja radica en que los números binarios pueden volverse muy largos, especialmente cuando se representan números grandes.
+            </p>
+            <h3>2. Sistema Octal</h3>
+            <p>
+                El sistema octal tiene una base de 8, utilizando los dígitos del 0 al 7. Cada posición en un número octal representa una potencia de 8. Por ejemplo, el número octal <code>135</code> se descompone como (1 * 8^2 + 3 * 8^1 + 5 * 8^0 = 64 + 24 + 5 = 93) en decimal. Aunque el sistema octal fue útil en la programación de computadoras más antiguas, hoy en día ha sido en gran medida reemplazado por el sistema hexadecimal.
+            </p>
+            <h3>3. Sistema Decimal</h3>
+            <p>
+                El sistema decimal es el que usamos en nuestra vida diaria y tiene una base de 10. En este sistema, cada dígito representa una potencia de 10. Al movernos hacia la izquierda desde el bit menos significativo, el valor de cada posición aumenta después de alcanzar el 9. Por ejemplo, en el número <code>123</code>, se interpreta como (1 * 10^2 + 2 * 10^1 + 3 * 10^0 = 100 + 20 + 3 = 123). Este sistema es familiar y fácil de entender, ya que se basa en la cantidad de dedos que tenemos.
+            </p>
+            <h3>4. Sistema Hexadecimal</h3>
+            <p>
+                El sistema hexadecimal es de base 16 y utiliza los dígitos del 0 al 9 y las letras de la A a la F para representar los valores 10 a 15. Cada posición en un número hexadecimal representa una potencia de 16. Por ejemplo, el número hexadecimal <code>4B6</code> se descompone en (4 * 16^2 + 11 * 16^1 + 6 * 16^0 = 1024 + 176 + 6 = 1206) en decimal. La ventaja del sistema hexadecimal es su capacidad para representar números grandes de manera más compacta y legible. Permite condensar largas cadenas de números binarios en un formato más manejable.
+            </p>
+        </div>
+    </div>
+
+    <footer> <!-- Pie de página -->
+        <p>Dev by <a href="https://github.com/RBenJHz" target="_blank">@RbenJHz</a> </p> <!-- Enlace al perfil de GitHub -->
+    </footer>
+</div>
+
+<script src="script.js"></script> <!-- Enlace al archivo de JavaScript -->
+</body>
+</html>
