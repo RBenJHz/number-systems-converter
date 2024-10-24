@@ -10,14 +10,14 @@ COPY src ./src
 COPY mvnw ./
 COPY .mvn ./.mvn
 
+# Dar permisos de ejecución al script mvnw
+RUN chmod +x mvnw
+
 # Descargar dependencias (Maven)
-RUN chmod +x mvnw && ./mvnw dependency:go-offline -B
+RUN ./mvnw dependency:go-offline -B
 
 # Compilar la aplicación
 RUN ./mvnw package -DskipTests
-
-# Verificar si el JAR se generó
-RUN ls -l target
 
 # Copiar el archivo JAR generado al contenedor
 COPY target/numeric-converter-0.0.1-SNAPSHOT.jar app.jar

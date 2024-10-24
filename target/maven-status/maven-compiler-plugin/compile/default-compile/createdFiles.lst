@@ -1,0 +1,3 @@
+com\converter\numeric_converter\controller\ConversionController.class
+com\converter\numeric_converter\service\ConversionService.class
+com\converter\numeric_converter\NumericConverterApplication.class
